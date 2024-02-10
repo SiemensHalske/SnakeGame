@@ -32,6 +32,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QGraphicsScene,
                              )
 from PyQt5.QtCore import QEvent, QObject
 
+
 SCOREBOARD_PATH = 'highscores.json'
 GAME_SPEED = 100  # initial speed for the game in milliseconds
 
