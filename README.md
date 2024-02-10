@@ -17,17 +17,25 @@ Ein klassisches Snake-Spiel, implementiert in Python mit der PyQt-Bibliothek. Er
   - [Technische Besonderheiten](#technische-besonderheiten)
   - [Entwickler-Tipps](#entwickler-tipps)
   - [Mitwirken](#mitwirken)
+  - [Kontaktdetails](#kontaktdetails)
 
 ## Überblick
 
-Dieses Spiel ist eine moderne Umsetzung des klassischen Snake-Spiels mit erweiterten Funktionen und einer verbesserten Benutzeroberfläche, entwickelt mit Python und der PyQt5-Bibliothek. Es bietet nicht nur die Möglichkeit, das nostalgische Spiel in einer modernen Umgebung zu genießen, sondern integriert auch innovative Spielmechaniken und technische Lösungen.
+Bei diesem Projekt handelt es sich um eine moderne Interpretation des klassischen Snake-Spiels, realisiert durch die Verwendung von Python und der umfangreichen PyQt5-Bibliothek. Die Anwendung zielt darauf ab, den nostalgischen Charme des ursprünglichen Spiels zu bewahren, während sie gleichzeitig durch die Integration moderner Programmiermethoden und Benutzeroberflächen-Designs eine frische und ansprechende Spielerfahrung bietet. Das Spiel folgt den grundlegenden Regeln des traditionellen Snake-Spiels, erweitert diese jedoch um neue Elemente und Funktionen, die das Spielgeschehen bereichern und den Spieler vor neue Herausforderungen stellen.
+
+Die Implementierung nutzt die leistungsstarken Komponenten von PyQt5, insbesondere `QGraphicsView` und `QGraphicsScene`, um ein dynamisches und interaktives Spielumfeld zu schaffen. Diese Werkzeuge ermöglichen es, komplexe Grafiken und Benutzeroberflächen mit hoher Effizienz und Flexibilität zu gestalten, was die Entwicklung eines visuell ansprechenden und reaktionsschnellen Spiels erleichtert.
 
 ## Features
 
-- **Klassisches Snake-Gameplay**: Navigiere die Schlange durch das Spielfeld, um Nahrung zu konsumieren und wachse in der Länge.
-- **Quadtree-Kollisionserkennung**: Ein fortschrittliches System zur Erkennung von Kollisionen, das die Spielperformance verbessert und eine flüssige Spielerfahrung gewährleistet.
-- **Autopilot-Modus**: Ein spezieller Modus, der es der Schlange ermöglicht, autonom zu navigieren und Nahrung zu konsumieren.
-- **Anpassbare Spielparameter**: Spieler können verschiedene Einstellungen wie die Geschwindigkeit der Schlange und die Spielgröße anpassen.
+- **Klassisches Snake-Gameplay**: Im Herzen des Spiels steht das zeitlose Spielprinzip von Snake. Spieler steuern eine sich kontinuierlich bewegende Schlange durch ein Spielfeld, mit dem Ziel, Punkte zu sammeln, indem sie Nahrung aufnehmen, welche zufällig auf dem Spielfeld erscheint. Jedes Mal, wenn die Schlange Nahrung konsumiert, wächst sie in der Länge. Dies erhöht die Schwierigkeit des Spiels, da die Gefahr, sich selbst oder die Wand zu treffen, mit der Länge der Schlange steigt.
+
+- **Quadtree-Kollisionserkennung**: Eine der technischen Besonderheiten des Spiels ist die Verwendung einer Quadtree-Datenstruktur für eine effiziente Kollisionserkennung. Diese fortschrittliche Methode ermöglicht es, Kollisionen zwischen der Schlange, der Nahrung und den Wänden des Spielfelds schnell zu erkennen, indem der Raum in vier Quadranten unterteilt wird, die rekursiv in kleinere Abschnitte aufgeteilt werden können. Dies reduziert die Anzahl der notwendigen Vergleiche erheblich, was besonders bei einem größeren Spielfeld und einer längeren Schlange von Vorteil ist. Durch diese Optimierung wird sichergestellt, dass das Spiel auch unter komplexen Bedingungen flüssig und ohne Verzögerung läuft.
+
+- **Autopilot-Modus**: Eine innovative Funktion des Spiels ist der Autopilot-Modus, der es der Schlange ermöglicht, autonom zu agieren. In diesem Modus nutzt das Spiel Algorithmen, um den Pfad der Schlange durch das Spielfeld zu bestimmen, wobei versucht wird, Nahrung zu konsumieren, ohne in Gefahr zu laufen, eine Kollision zu verursachen. Dieser Modus ist nicht nur eine interessante technische Demonstration der Möglichkeiten von Algorithmen zur Pfadfindung und Entscheidungsfindung, sondern bietet den Spielern auch die Möglichkeit, die Strategien der Schlange zu beobachten und daraus zu lernen.
+
+- **Anpassbare Spielparameter**: Das Spiel bietet eine Vielzahl von Optionen zur Anpassung der Spielparameter, sodass Spieler das Erlebnis ihren Vorlieben anpassen können. Dazu gehören Einstellungen für die Geschwindigkeit der Schlange, die Größe des Spielfelds und möglicherweise die Häufigkeit, mit der Nahrung erscheint. Diese Flexibilität erlaubt es den Spielern, die Schwierigkeit und das Tempo des Spiels zu variieren, was für eine breite Palette von Spielerfahrungen sorgt, von entspannend bis intensiv herausfordernd.
+
+- **A*-Algorithmus**: Der Autopilot-Modus der Schlange beruht auf der Verwendung des A*-Algorithmus zur Pfadfindung. Dieser Algorithmus ist ein leistungsstarker Wegfindungsalgorithmus, der es ermöglicht, den kürzesten Weg durch ein statisches Spielfeld zu berechnen. Durch die Verwendung dieses Algorithmus kann die Schlange autonom navigieren, während sie versucht, Nahrung aufzunehmen, und dabei Hindernissen ausweicht. Durch die Implementierung dieser künstlichen Intelligenz-Komponente wird das Spiel zu einer Herausforderung für Spieler, die versuchen, die Leistungen der Schlange zu übertreffen.
 
 ## Installation
 
@@ -63,3 +71,12 @@ Um das Spiel zu starten, führe das Skript `main.py` aus dem Hauptverzeichnis au
 ## Mitwirken
 
 Interessierte Entwickler sind herzlich eingeladen, zum Projekt beizutragen. Ob es sich um Fehlerbehebungen, neue Features oder Verbesserungen handelt, jeder Beitrag ist willkommen.
+
+## Kontaktdetails
+
+Für Fragen, Anregungen oder wenn du einfach nur in Kontakt treten möchtest, findest du hier einige Möglichkeiten, wie du das Team hinter dem Snake Game erreichen kannst:
+
+- **E-Mail**: [siemenshendrik1@gmail.com](mailto:siemenshendrik1@gmail.com)
+- **GitHub**: [https://github.com/SiemensHalske](https://github.com/SiemensHalske)
+
+Ich freue mich, von dir zu hören, und ich hoffe, dass du Spaß hast, das Snake Game zu spielen.
