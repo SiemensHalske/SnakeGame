@@ -1316,7 +1316,10 @@ def main():
 
     try:
         app = QApplication(argv)
-        window = SnakeGame()
+        window = SnakeGame(
+            screen_width=800,
+            screen_height=800
+        )
         window.show()
         app.exec_()
         ack = True
