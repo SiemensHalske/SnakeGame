@@ -81,6 +81,8 @@ Wenn du einen benutzerfreundlicheren Weg bevorzugst oder das Spiel an jemanden w
 
 Solltest du auf Probleme während der Installation oder beim Start des Spiels stoßen, überprüfe zuerst, ob alle Voraussetzungen korrekt installiert sind. Für weitere Unterstützung kannst du die Dokumentation konsultieren oder ein Issue im GitHub-Repository des Spiels erstellen.
 
+Oder ihr schickt mir Rauchzeichen. Brieftauben fängt der Hund ab.
+
 ## Spielstart
 
 Das Starten des Snake-Spiels kann je nach Installationsmethode variieren. Wenn du das Spiel manuell installiert hast, indem du den Quellcode heruntergeladen und die Abhängigkeiten installiert hast, kannst du das Spiel starten, indem du `main.py` im Hauptverzeichnis des Spiels ausführst. Dies kann über ein Terminal oder eine Kommandozeile geschehen, indem du zum Verzeichnis des Spiels navigierst und `python main.py` eingibst.
