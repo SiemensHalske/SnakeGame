@@ -1,0 +1,15 @@
+Snake Game - Version 1.0
+
+Dies ist Version 1.0 des Snake Game-Projekts.
+
+Änderungen:
+- Hinzufügen der grundlegenden Spielfunktionalität
+- Implementierung der Schlange, des Apfels und der Spiellogik
+- Hinzufügen von Steuerungsmöglichkeiten
+
+Weitere Informationen und den Quellcode finden Sie auf GitHub:
+https://github.com/IhrBenutzername/IhrProjekt
+
+Lizenz:
+Dieses Projekt wird unter der GNU General Public License v3.0 (GPL-3.0) veröffentlicht.
+Bitte beachten Sie die Lizenzinformationen im Ordner "docs/LICENSE" für weitere Details.
