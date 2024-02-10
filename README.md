@@ -143,7 +143,8 @@ Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A\
 
 ### Experimentiere mit den Einstellungen
 
-1. **Ändern der Spielgeschwindigkeit**: Die Geschwindigkeit der Schlange ist ein wesentlicher Aspekt, der das Spielgefühl signifikant beeinflussen kann. Eine höhere Geschwindigkeit macht das Spiel herausfordernder, während eine niedrigere Geschwindigkeit es einfacher macht, aber möglicherweise weniger spannend. Die `adjustSpeed` Methode passt die Spielgeschwindigkeit dynamisch an, basierend auf der Länge der Schlange. Dies sorgt für eine stetige Steigerung der Schwierigkeit, da die Schlange wächst und das Spiel fortschreitet.
+1. **Ändern der Spielgeschwindigkeit**:
+   Die Geschwindigkeit der Schlange ist ein wesentlicher Aspekt, der das Spielgefühl signifikant beeinflussen kann. Eine höhere Geschwindigkeit macht das Spiel herausfordernder, während eine niedrigere Geschwindigkeit es einfacher macht, aber möglicherweise weniger spannend. Die `adjustSpeed` Methode passt die Spielgeschwindigkeit dynamisch an, basierend auf der Länge der Schlange. Dies sorgt für eine stetige Steigerung der Schwierigkeit, da die Schlange wächst und das Spiel fortschreitet.
 
    ```python
    # Beispiel: Anpassen der Spielgeschwindigkeit basierend auf der Schlange-Länge
@@ -160,7 +161,8 @@ Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A\
 
    Die adjustSpeed Methode ist ein ausgezeichnetes Beispiel dafür, wie du das Spielverhalten anpassen kannst, um verschiedene Spielmodi und Schwierigkeitsgrade zu entdecken. Experimentiere mit den Werten für base_interval und speed_increase, um das optimale Gleichgewicht zwischen Spielbarkeit und Herausforderung zu finden.
 
-2. **Anpassen der Größe des Spielfelds**: Ein größeres oder kleineres Spielfeld kann die Strategie und Spielbarkeit erheblich beeinflussen. Ein größeres Feld bietet mehr Raum, erhöht aber auch die Zeit, die benötigt wird, um Nahrung zu finden.
+2. **Anpassen der Größe des Spielfelds**:
+   Ein größeres oder kleineres Spielfeld kann die Strategie und Spielbarkeit erheblich beeinflussen. Ein größeres Feld bietet mehr Raum, erhöht aber auch die Zeit, die benötigt wird, um Nahrung zu finden.
 
    ```python
    window = SnakeGame(
