@@ -14,7 +14,7 @@ In diesem Dokument werden die Änderungen und Neuerungen der verschiedenen Versi
 - **Quadtree-Datenstruktur**: Einführung einer Quadtree-Datenstruktur für effiziente Kollisionserkennungen, die eine dynamischere und interaktivere Spielwelt ermöglicht.
 - **A\*-Algorithmus**: Implementierung des A\*-Algorithmus zur Ermittlung des kürzesten Pfades zwischen zwei Punkten in der Spielwelt, was strategisches Spielen fördert.
 - **Autopilot-Modus**: Integration eines Autopilot-Modus, der auf dem A\*-Algorithmus basiert, ermöglicht es den Spielern, die Schlange automatisch das Ziel verfolgen zu lassen.
-
+ 
 ### Verbesserungen
 
 - **Leistungsoptimierungen**: Durch den Einsatz der Quadtree-Datenstruktur und effizienten Algorithmen wurden die Leistung und die Reaktionsfähigkeit des Spiels deutlich verbessert.
