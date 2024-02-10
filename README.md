@@ -143,14 +143,22 @@ Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A\
 
 ### Experimentiere mit den Einstellungen
 
-1. **Ändern der Spielgeschwindigkeit**: Die Geschwindigkeit der Schlange ist ein zentraler Aspekt, der das Spielgefühl erheblich beeinflussen kann. Eine höhere Geschwindigkeit macht das Spiel herausfordernder, während eine niedrigere Geschwindigkeit es einfacher macht, aber möglicherweise weniger spannend.
+1. **Ändern der Spielgeschwindigkeit**: Die Geschwindigkeit der Schlange ist ein wesentlicher Aspekt, der das Spielgefühl signifikant beeinflussen kann. Eine höhere Geschwindigkeit macht das Spiel herausfordernder, während eine niedrigere Geschwindigkeit es einfacher macht, aber möglicherweise weniger spannend. Die `adjustSpeed` Methode passt die Spielgeschwindigkeit dynamisch an, basierend auf der Länge der Schlange. Dies sorgt für eine stetige Steigerung der Schwierigkeit, da die Schlange wächst und das Spiel fortschreitet.
 
    ```python
-   # Beispiel: Ändern der Schlange-Geschwindigkeit
-   snake_speed = 10  # Standardgeschwindigkeit
-   snake_speed = 15  # Erhöhe die Geschwindigkeit für mehr Herausforderung
-   snake_speed = 5   # Verringere die Geschwindigkeit für ein einfacheres Spiel
+   # Beispiel: Anpassen der Spielgeschwindigkeit basierend auf der Schlange-Länge
+   def adjustSpeed(self):
+       snake_length = len(self.snake_positions)
+       base_interval = 100
+       speed_increase = 0.25
+
+       new_interval = max(20, int(base_interval - (snake_length - 1) * speed_increase))
+       self.timer.setInterval(new_interval)
    ```
+
+Dieser Codeabschnitt zeigt, wie die adjustSpeed Methode die Spielgeschwindigkeit basierend auf der Länge der Schlange anpasst. Die Geschwindigkeit erhöht sich, indem das Timer-Intervall verringert wird, je länger die Schlange wird. Die Verwendung dieser Methode in deinem Spiel ermöglicht es, dass das Spiel mit zunehmender Länge der Schlange schwieriger und anspruchsvoller wird, wodurch ein dynamischeres und herausfordernderes Spielerlebnis entsteht.
+
+Die adjustSpeed Methode ist ein ausgezeichnetes Beispiel dafür, wie du das Spielverhalten anpassen kannst, um verschiedene Spielmodi und Schwierigkeitsgrade zu entdecken. Experimentiere mit den Werten für base_interval und speed_increase, um das optimale Gleichgewicht zwischen Spielbarkeit und Herausforderung zu finden.
 
 2. **Anpassen der Größe des Spielfelds**: Ein größeres oder kleineres Spielfeld kann die Strategie und Spielbarkeit erheblich beeinflussen. Ein größeres Feld bietet mehr Raum, erhöht aber auch die Zeit, die benötigt wird, um Nahrung zu finden.
 
