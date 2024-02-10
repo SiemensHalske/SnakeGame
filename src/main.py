@@ -18,19 +18,21 @@
 
 
 from json import JSONDecodeError, dump, load
-from os import path, stat
+from os import path
 from sys import exit as sys_exit, argv
 from time import sleep
 from random import random, randint
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsScene
-from PyQt5.QtWidgets import QGraphicsView, QGraphicsRectItem, QLabel
-from PyQt5.QtWidgets import QVBoxLayout, QMessageBox, QAction
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QInputDialog, QListWidget
-from PyQt5.QtWidgets import QDialog, QPushButton
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QGraphicsScene,
+                             QGraphicsView, QGraphicsRectItem, QLabel,
+                             QVBoxLayout, QMessageBox, QAction,
+                             QWidget, QHBoxLayout, QInputDialog, QListWidget,
+                             QDialog, QPushButton
+                             )
 from PyQt5.QtCore import QEvent, QObject
 
+SCOREBOARD_PATH = 'highscores.json'
 GAME_SPEED = 100  # initial speed for the game in milliseconds
 
 
@@ -1045,16 +1047,13 @@ class SnakeGame(QMainWindow):
 
     def loadScores(self):
         try:
-            # Überprüfe, ob die Datei existiert und nicht leer ist
-            if_conds = [
-                path.exists("highscores.json"),
-                stat("highscores.json").st_size > 0
-            ]
-            if all(if_conds):
-                with open("highscores.json", "r") as file:
-                    self.highscores = load(file)
-            else:
+            if not path.exists(SCOREBOARD_PATH):
+                with open(SCOREBOARD_PATH, "w") as file:
+                    dump([], file)
                 self.highscores = []
+            else:
+                with open(SCOREBOARD_PATH, "r") as file:
+                    self.highscores = load(file)
         except JSONDecodeError:
             self.highscores = []
 
@@ -1344,7 +1343,7 @@ def first_run_check():
         correctly and smoothly.
     """
 
-    if not path.exists("highscores.json"):
+    if not path.exists(SCOREBOARD_PATH):
         sleep(2)
 
 
