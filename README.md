@@ -137,7 +137,9 @@ Für eine tiefergehende Erklärung des A\*-Algorithmus und seiner Anwendung im A
 
 ### Abschließende Gedanken
 
-Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A\*-Algorithmus für den Autopilot-Modus sind Beispiele für die technischen Innovationen, die dieses Snake-Spiel auszeichnen. Diese Funktionen nicht nur verbessern die Spielqualität und Leistung, sondern bieten auch wertvolle Lernmöglichkeiten für Entwickler, die sich mit fortschrittlichen Programmierungskonzepten und Algorithmen auseinandersetzen möchten.
+Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A*-Algorithmus für den Autopilot-Modus sind Beispiele für die technischen Innovationen, die dieses Snake-Spiel auszeichnen. Diese Funktionen verbessern nicht nur die Spielqualität und Leistung, sondern bieten auch wertvolle Lernmöglichkeiten für Entwickler, die sich mit fortschrittlichen Programmierungskonzepten und Algorithmen auseinandersetzen möchten.
+
+Es ist wichtig zu erwähnen, dass der A*-Algorithmus momentan nur testweise implementiert ist und noch nicht vollständig funktioniert. Diese vorläufige Implementierung dient als Grundlage für zukünftige Verbesserungen und Optimierungen. Entwickler, die an der Weiterentwicklung des Spiels interessiert sind, können diese Implementierung als Ausgangspunkt nutzen, um tiefergehende Kenntnisse in der Pfadfindung und algorithmischen Problemstellung zu erlangen. Die Weiterentwicklung und Feinabstimmung des A*-Algorithmus bietet eine ausgezeichnete Gelegenheit, praktische Erfahrungen mit dieser leistungsstarken Suchtechnik zu sammeln und gleichzeitig die Spielmechanik und -dynamik zu verbessern.
 
 ## Entwickler-Tipps
 

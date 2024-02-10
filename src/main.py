@@ -696,7 +696,7 @@ class SnakeGame(QMainWindow):
             None
     """
 
-    def __init__(self, screen_width=600, screen_height=600):
+    def __init__(self, screen_width=800, screen_height=800):
         super().__init__()
 
         self.game_area_width = screen_width
@@ -1022,17 +1022,24 @@ class SnakeGame(QMainWindow):
             self.saveScores()  # Speichere die aktualisierte Liste
             self.updateScoreboard()
 
-        msgBox = QMessageBox()
-        msgBox.setWindowTitle("Game Over")
-        msgBox.setText("Would you like to restart?")
-        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        returnValue = msgBox.exec()
+        returnValue = self.show_restart_dialog()
         if returnValue == QMessageBox.Yes:
             self.restartGame()
         else:
             if close_on_no:
                 self.close()
             self.timer.stop()
+
+    def show_restart_dialog(self) -> bool:
+        """Show the restart dialog."""
+        msgBox = QMessageBox()
+        msgBox.setWindowTitle("Game Over")
+        msgBox.setText("Would you like to restart?")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        returnValue = msgBox.exec()
+        if returnValue == QMessageBox.Yes:
+            return True
+        return False
 
     def restartGame(self):
         self.score = 0
@@ -1247,6 +1254,19 @@ class SnakeGame(QMainWindow):
 
 
 class KeyPressEater(QObject):
+    application_close_keys = {Qt.Key_Escape}
+    game_restart_keys = {Qt.Key_R}
+    pause_game_keys = {Qt.Key_Space}
+    autopilot_toggle_key = {Qt.Key_Q}
+    direction_keys = {
+        Qt.Key_Left, Qt.Key_Right,
+        Qt.Key_Up, Qt.Key_Down,
+        Qt.Key_A, Qt.Key_D,
+        Qt.Key_W, Qt.Key_S,
+        Qt.Key_4, Qt.Key_8,
+        Qt.Key_5, Qt.Key_6
+    }
+
     def __init__(self, game):
         super().__init__()
         self.game = game  # Referenz auf die SnakeGame-Instanz
@@ -1255,26 +1275,19 @@ class KeyPressEater(QObject):
         if event.type() == QEvent.KeyPress:
             key = event.key()
 
-            if key == Qt.Key_Escape:
+            if key in self.application_close_keys:
                 self.game.close()
                 return True
-            elif key == Qt.Key_R:
+            elif key in self.game_restart_keys:
                 self.game.restartGame()
                 return True
-            elif key == Qt.Key_Space:
+            elif key in self.pause_game_keys:
                 self.game.handleSpacePress()
                 return True
-            elif key == Qt.Key_Q:
+            elif key in self.autopilot_toggle_key:
                 self.game.toggle_autopilot()
                 return True
-            elif key in [
-                Qt.Key_Left, Qt.Key_Right,
-                Qt.Key_Up, Qt.Key_Down,
-                Qt.Key_A, Qt.Key_D,
-                Qt.Key_W, Qt.Key_S,
-                Qt.Key_4, Qt.Key_8,
-                Qt.Key_5, Qt.Key_6
-            ]:
+            elif key in self.direction_keys:
                 self.game.handleDirectionChange(key)
                 return True
 
