@@ -19,7 +19,7 @@
 
 from json import JSONDecodeError, dump, load
 from os import path, stat
-from sys import exit, argv
+from sys import exit as sys_exit, argv
 from time import sleep
 from random import random, randint
 from PyQt5.QtCore import Qt, QTimer
@@ -35,7 +35,23 @@ GAME_SPEED = 100  # initial speed for the game in milliseconds
 
 
 class Node:
-    """Knotenklasse für die A* Suche"""
+    """
+        Node class for the A* algorithm.
+        The Node class is used to represent a node in the A* algorithm.
+        It is used to store the parent node, the position, and the g, h, and
+        f values of the node. The g value represents the cost of the path from
+        the start to the current position, the h value represents the
+        estimated cost of the path from the current position to the goal, and
+        the f value is the sum of the g and h values and is used to determine
+        the most promising path to explore next.
+
+        The Node class is used in the implementation of the A* algorithm to
+        find the shortest path between two points in the game world. It is
+        widely used in many fields, including games, robotics, and geographical
+        information systems. The algorithm uses a heuristic function to
+        estimate the cost of reaching the goal from the current position and
+        makes use of this estimate to find the most promising path to explore.
+    """
 
     def __init__(self, parent=None, position=None):
         self.parent = parent
@@ -49,23 +65,76 @@ class Node:
 
 
 def astar(quadtree, start, end):
-    """Rückgabe eines Pfades als Liste von Tupeln von einem Start- zu einem Endpunkt"""
-    # Erstelle Start- und Endknoten
+    """
+        A* (A-Star) algorithm implementation to find the shortest path.
+        The A* (A-Star) algorithm is an informed search algorithm that is
+        used to find the shortest path between two points. It is widely
+        used in many fields, including games, robotics, and geographical
+        information systems. The algorithm uses a heuristic function to
+        estimate the cost of reaching the goal from the current position
+        and makes use of this estimate to find the most promising path to
+        explore.
+
+        The A* algorithm uses a combination of the g, h, and f values to
+        determine the most promising path. The g value represents the
+        cost of the path from the start to the current position, and the
+        h value represents the estimated cost of the path from the current
+        position to the goal. The f value is the sum of the g and h values
+        and is used to determine the most promising path to explore next.
+
+        The A* algorithm uses a priority queue to explore the most promising
+        path first and gradually explores the other paths based on the f value.
+
+        The implementation of the A* algorithm consists of the following steps:
+            1. Create a start node and an end node.
+            2. Initialize the open and closed lists.
+            3. Add the start node to the open list.
+            4. Loop until the end node is found or the open list is empty.
+            5. Remove the node with the lowest f value from the open list
+               and add it to the closed list.
+            6. Generate the child nodes of the current node and calculate
+               their f, g, and h values.
+            7. Loop through the child nodes and add them to the open list
+               if they are not already on the closed list and have a lower
+               f value than an existing node in the open list.
+            8. Return the path to the end node if found.
+
+        Parameters:
+        -----------
+            quadtree: Quadtree
+                        A Quadtree object representing the quadtree in the
+                        game world.
+
+            start: tuple
+                        A tuple representing the start position in the
+                        game world.
+
+            end: tuple
+                        A tuple representing the end position in the
+                        game world.
+
+        Returns:
+        --------
+            path: list
+                        A list representing the shortest path between the start
+                        and end positions in the game world.
+    """
+
+    # Create start and end node
     start_node = Node(None, start)
     start_node.g = start_node.h = start_node.f = 0
     end_node = Node(None, end)
     end_node.g = end_node.h = end_node.f = 0
 
-    # Initialisiere offene und geschlossene Liste
+    # Initialize the open and closed lists
     open_list = []
     closed_list = []
 
-    # Füge den Startknoten zur offenen Liste hinzu
     open_list.append(start_node)
 
-    # Schleife, bis das Ende gefunden ist
+    # Loop until the end node is found
     while len(open_list) > 0:
-        # Hole den aktuellen Knoten
+        # Get node with the lowest f value
         current_node = open_list[0]
         current_index = 0
         for index, item in enumerate(open_list):
@@ -73,54 +142,65 @@ def astar(quadtree, start, end):
                 current_node = item
                 current_index = index
 
-        # Entferne den aktuellen Knoten aus der offenen Liste und füge ihn zur geschlossenen Liste hinzu
+        # Remove the current node from the open list and add it to
+        # the closed list
         open_list.pop(current_index)
         closed_list.append(current_node)
 
-        # Prüfe, ob das Ziel erreicht wurde
+        # Found the end node
         if current_node.position == end_node.position:
             path = []
             current = current_node
             while current is not None:
                 path.append(current.position)
                 current = current.parent
-            return path[::-1]  # Rückgabe des umgekehrten Pfades
+            return path[::-1]  # Return reversed path
 
-        # Generiere Kinder
+        # Generate children
         children = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]:  # Angrenzende Quadrate
-            node_position = (
-                current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
 
-            # Stelle sicher, dass der Weg begehbar ist
+        # Adjacent squares
+        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+            node_position = (
+                current_node.position[0] + new_position[0],
+                current_node.position[1] + new_position[1]
+            )
+
+            # Make sure the new node is within the bounds of the game world
             if not quadtree.is_open_space(node_position[0], node_position[1]):
                 continue
 
-            # Erstelle einen neuen Knoten
-            new_node = Node(current_node, node_position)
+                # Create a new node
+                new_node = Node(current_node, node_position)
 
-            # Füge ihn der Liste der Kinder hinzu
-            children.append(new_node)
+                # Add it to the list of children
+                children.append(new_node)
 
-        # Schleife durch Kinder
-        for child in children:
-            # Kind ist auf der geschlossenen Liste
-            if child in closed_list:
-                continue
+            # Loop through children
+            for child in children:
+                # Child is on the closed list
+                if child in closed_list:
+                    continue
 
-            # Erstelle die f, g und h Werte
-            child.g = current_node.g + 1
-            child.h = ((child.position[0] - end_node.position[0]) **
-                       2) + ((child.position[1] - end_node.position[1]) ** 2)
-            child.f = child.g + child.h
+                # Calculate the f, g, and h values
+                child.g = current_node.g + 1
+                child.h = (
+                    (child.position[0] - end_node.position[0]) ** 2) + \
+                    ((child.position[1] - end_node.position[1]) ** 2)
+                child.f = child.g + child.h
 
-            # Kind ist bereits in der offenen Liste
-            for open_node in open_list:
-                if child.position == open_node.position and child.g > open_node.g:
-                    break
-            else:
-                # Füge das Kind zur offenen Liste hinzu
-                open_list.append(child)
+                # Child is already on the open list
+                for open_node in open_list:
+                    conds = [
+                        child.position == open_node.position,
+                        child.g > open_node.g
+                    ]
+
+                    if all(conds):
+                        break
+                else:
+                    # Add the child to the open list
+                    open_list.append(child)
 
 
 class Quadtree:
@@ -662,22 +742,22 @@ class SnakeGame(QMainWindow):
         self.mainLayout = QHBoxLayout()
         self.gameLayout = QVBoxLayout()
 
-        # Score und Game Over Labels
+        # Score and Game Over Labels
         self.scoreLabel = QLabel("Score: 0")
         self.scoreLabel.setFont(QFont("Arial", 16))
         self.gameOverLabel = QLabel("Game Over")
         self.gameOverLabel.setFont(QFont("Arial", 20, QFont.Bold))
         self.gameOverLabel.hide()
 
-        # Layout für Labels
+        # Layout for labels
         self.labelLayout = QVBoxLayout()
         self.labelLayout.addWidget(self.scoreLabel)
         self.labelLayout.addWidget(self.gameOverLabel)
 
-        # Füge das Label-Layout zum Game-Layout hinzu
+        # Add label layout to game layout
         self.gameLayout.addLayout(self.labelLayout)
 
-        # Spielfeld
+        # GraphicsView for the game world
         self.scene = QGraphicsScene(
             0, 0, self.game_area_width, self.game_area_height)
         self.view = QGraphicsView(self.scene)
@@ -685,21 +765,21 @@ class SnakeGame(QMainWindow):
                                int(self.scene.height()) + 2)
         self.gameLayout.addWidget(self.view)
 
-        # Scoreboard für Highscores
+        # Scoreboard for the highscores
         self.scoreboard = QListWidget()
         self.scoreboard.setMaximumWidth(200)
 
-        # Füge das Game-Layout und das Scoreboard zum Hauptlayout hinzu
+        # Add game layout to main layout
         self.mainLayout.addLayout(self.gameLayout)
         self.mainLayout.addWidget(self.scoreboard)
 
         self.centralWidget.setLayout(self.mainLayout)
 
-        # Menüleiste
+        # Setup the menu
         menubar = self.menuBar()
 
-        # Menü "File"
-        fileMenu = menubar.addMenu('File')
+        # Menu "Game"
+        fileMenu = menubar.addMenu('Game')
         restartAction = QAction('Restart', self)
         restartAction.triggered.connect(self.restartGame)
         fileMenu.addAction(restartAction)
@@ -707,7 +787,7 @@ class SnakeGame(QMainWindow):
         closeAction.triggered.connect(self.close)
         fileMenu.addAction(closeAction)
 
-        # Menü "Preferences"
+        # Menu "Preferences"
         prefMenu = menubar.addMenu('Preferences')
         settingsAction = QAction('Settings-Window', self)
         settingsAction.triggered.connect(self.showSettings)
@@ -720,13 +800,12 @@ class SnakeGame(QMainWindow):
             self.view.setFocus()
 
     def move_settings_window(self):
-        # Berechne die Position links neben dem Hauptfenster
+        # Calculate the position of the settings window
         mainWindowGeometry = self.frameGeometry()
         settingsWidth = self.settingsWindow.frameGeometry().width()
         settingsHeight = self.settingsWindow.frameGeometry().height()
 
-        # Positioniere das Einstellungsfenster links neben dem Hauptfenster
-        # Stelle sicher, dass beide Argumente ganzzahlig sind
+        # Center the settings window next to the main window
         term_1 = int(mainWindowGeometry.left() - settingsWidth)
         sub_term_2 = mainWindowGeometry.top()
         sub_term_3 = (mainWindowGeometry.height() - settingsHeight)
@@ -738,17 +817,18 @@ class SnakeGame(QMainWindow):
         self.autopilot_enabled = not self.autopilot_enabled
 
     def update_direction_based_on_path(self, next_step):
-        if not next_step:  # Wenn kein nächster Schritt vorhanden ist, überspringe die Aktualisierung
+        # If there is no path, continue with the current direction
+        if not next_step:
             return
 
         head_x, head_y = self.snake_positions[0]
         next_x, next_y = next_step
 
-        # Berechne die Differenz zwischen aktueller Position und nächstem Schritt
+        # Calculate the direction to the next step
         dx = next_x - head_x
         dy = next_y - head_y
 
-        # Überprüfe die Richtungsänderung und verhindere eine 180-Grad-Drehung
+        # Check if we need to turn to the left, right, up or down
         if dx == 1 and self.direction != Direction.Left:
             self.nextDirection = Direction.Right
         elif dx == -1 and self.direction != Direction.Right:
@@ -811,6 +891,12 @@ class SnakeGame(QMainWindow):
             player to change the direction of the snake using the arrow keys
             or the WASD keys.
 
+            The autopilot logic is also handled here. The game will use the
+            A* algorithm to find the shortest path to the food, and the snake
+            will automatically follow the path. If the path to the food is not
+            available, the snake will continue in its current direction and
+            the normal controls will be enabled.
+
             Parameters:
             -----------
                 None
@@ -820,19 +906,12 @@ class SnakeGame(QMainWindow):
                 None
         """
         if self.autopilot_enabled:
-            # Logik für den Autopilot-Modus
-            # Berechne den Pfad zum Futter mit dem A*-Algorithmus
             path_to_food = self.calculate_path_to_food()
             if path_to_food:  # Wenn ein Pfad gefunden wurde
                 self.update_direction_based_on_path(path_to_food)
             else:
-                # Hier könntest du eine alternative Logik implementieren,
-                # falls kein Pfad gefunden wird, z.B. zufällige Bewegung
-                # oder Spielende.
                 pass
         else:
-            # Manueller Modus: Verwende die nächste Richtung, die durch
-            # Tasteneingaben gesetzt wurde
             self.direction = self.nextDirection
 
         new_head_pos = self.calculateNewHeadPosition()
@@ -856,13 +935,13 @@ class SnakeGame(QMainWindow):
         self.updateSnake()
 
     def calculate_path_to_food(self):
-        start = (self.snake_positions[0][0] // 20, self.snake_positions[0][1] // 20)
+        start = (self.snake_positions[0][0] // 20,
+                 self.snake_positions[0][1] // 20)
         end = (self.food.position[0] // 20, self.food.position[1] // 20)
 
-        # Rufe astar direkt mit dem Quadtree, Start- und Endpunkt auf
         path = astar(self.quadtree, start, end)
         if path:
-            return path[1:]  # Entferne die Startposition aus dem Pfad
+            return path[1:]
         else:
             return []
 
@@ -1279,7 +1358,7 @@ if __name__ == "__main__":
         return 1. In normal conditions, it will return 0.
     """
     try:
-        exit(0 if main() else 1)
+        sys_exit(0 if main() else 1)
     except Exception as e:
         print(f"Exception occurred: {e}")
-        exit(1)
+        sys_exit(1)
