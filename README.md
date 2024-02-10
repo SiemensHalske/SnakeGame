@@ -156,6 +156,10 @@ Die Integration von Quadtrees für Kollisionserkennung und die Verwendung des A\
        self.timer.setInterval(new_interval)
    ```
 
+   Dieser Codeabschnitt zeigt, wie die adjustSpeed Methode die Spielgeschwindigkeit basierend auf der Länge der Schlange anpasst. Die Geschwindigkeit erhöht sich, indem das Timer-Intervall verringert wird, je länger die Schlange wird. Die Verwendung dieser Methode in deinem Spiel ermöglicht es, dass das Spiel mit zunehmender Länge der Schlange schwieriger und anspruchsvoller wird, wodurch ein dynamischeres und herausfordernderes Spielerlebnis entsteht.
+
+   Die adjustSpeed Methode ist ein ausgezeichnetes Beispiel dafür, wie du das Spielverhalten anpassen kannst, um verschiedene Spielmodi und Schwierigkeitsgrade zu entdecken. Experimentiere mit den Werten für base_interval und speed_increase, um das optimale Gleichgewicht zwischen Spielbarkeit und Herausforderung zu finden.
+
 2. **Anpassen der Größe des Spielfelds**: Ein größeres oder kleineres Spielfeld kann die Strategie und Spielbarkeit erheblich beeinflussen. Ein größeres Feld bietet mehr Raum, erhöht aber auch die Zeit, die benötigt wird, um Nahrung zu finden.
 
    ```python
