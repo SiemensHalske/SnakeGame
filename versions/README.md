@@ -7,7 +7,7 @@ In diesem Dokument werden die Änderungen und Neuerungen der verschiedenen Versi
 - [Version 1.0](#version-10): Einführung des klassischen Snake-Spiels mit modernen Verbesserungen.
 - [Version 2.0 (Geplante Funktionen)](#version-20-geplante-funktionen): Erweiterung des Spiels um neue Modi und Funktionen.
 
-## Version 1.0
+## [Version 1.0](#version-10)
 
 ### Neue Funktionen
 
@@ -21,7 +21,7 @@ In diesem Dokument werden die Änderungen und Neuerungen der verschiedenen Versi
 - **Benutzeroberfläche**: Überarbeitung der Benutzeroberfläche für eine intuitivere Bedienung und ein ansprechenderes Spielerlebnis.
 - **Fehlerbehebungen und Stabilitätsverbesserungen**: Umfassende Tests und Korrekturen zur Erhöhung der Spielstabilität und zur Minimierung von Fehlern.
 
-## Version 2.0 (Geplante Funktionen)
+## [Version 2.0 (Geplante Funktionen)](#version-20-geplante-funktionen)
 
 ### Neue Funktionen (Vorschau)
 
